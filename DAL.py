@@ -12,7 +12,12 @@ class Dal():
 
     def open(self):
         try:
-            self.connection = mysql.connector.connect(user= self.db_user, password = self.db_password, host = self.db_host, database = self.db_database)
+            self.connection = mysql.connector.connect(
+                            user= self.db_user,
+                            password = self.db_password,
+                            host = self.db_host,
+                            database = self.db_database
+                                                    )
             self.cursor = self.connection.cursor(dictionary=True)
         except:
             print("Could not open connection. Check DAL")

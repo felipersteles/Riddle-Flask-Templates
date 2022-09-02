@@ -28,6 +28,14 @@ class DALUser(DAL.Dal):
         self.cursor.execute(f"Select * from {tablename} ;")
         return self.cursor.fetchall()
 
+    def get_ID_by_name(self, name):
+        self.cursor.execute(f"SELECT ID from {tablename} where Name = '{name}' ;")
+        result = self.cursor.fetchone()
+        if result:
+            return result["ID"]
+        else:
+            return False
+
 
 
 
