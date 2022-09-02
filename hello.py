@@ -3,7 +3,6 @@ from Controller_User import ControllerUser
 
 from Controller_Riddle import ControllerRiddle
 
-
 app = Flask(__name__)
 app.debug = True
 app.secret_key = 'chavesecreta'

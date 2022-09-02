@@ -1,10 +1,10 @@
 from DAL_User import DALUser
 from DAL_Passwords import DALPasswords
-from DAL import Dal
+# from DAL import Dal
 class ControllerUser():
     def __init__(self) -> None:
 
-        self.session = Dal()
+        # self.session = Dal()
 
         self.sessionUser = DALUser()
         self.sessionPassword = DALPasswords()
@@ -32,7 +32,7 @@ class ControllerUser():
         if not self.check_user_password(name,password):
             errors.append("Password Incorrect. Please try again.")
             return False, errors
-            
+
         return True, errors
         
 	
