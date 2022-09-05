@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Riddle me this!{% endblock %}
+
+{% block content %}
+<form action="" method="post" autocomplete="off">
+    <div> Riddle me this:</div>
+	<div>
+		<header>{{ riddle }}</header>
+		
+    <div>
+    <div>
+        <label for="answer">Answer: </label>
+        <input type="text" name="answer">
+	<div>
+	<div>
+        <input type="submit" name="btn" value="submit" />
+        <input type="submit" name="btn" value="refresh"/>
+    <div> 
+
+    <div class="message"> 
+        {% if response != None %}
+        {% if response == False %}
+
+           <p class="error"> Error: </p> {{error}}
+
+           {% endif%}
+
+           {% if response == True %}
+           <p class="solution"> You're right! Congrats!! </p> 
+           {% endif%}
+
+        {% endif%}
+
+
+    </div>
+</form>
+
+{% endblock %}

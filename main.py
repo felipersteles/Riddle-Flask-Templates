@@ -13,10 +13,36 @@ controllerRiddle = ControllerRiddle()
 
 
 
-@app.route("/")
+@app.route("/", methods = ['POST','GET'])
 def home():
-	users = controllerUser.get_list_dict_users()
-	return render_template("home.html", data=users)
+	#riddle = controllerRiddle.get_riddle_random()
+	if request.method == "GET":
+		riddle = controllerRiddle.get_riddle_last()
+		# session["Riddle_ID"] = riddle.ID
+		# session["Riddle_Answer"] = riddle.answer
+		# session["Riddle_Question"] = riddle.q
+		session["Riddle"] = riddle.__dict__
+
+
+		return render_template("riddle.html", riddle = session["Riddle"]["question"])
+
+	if request.method == "POST" and request.form["btn"] == "submit":
+		response = None
+		user_answer = request.form["answer"]
+		if controllerRiddle.check_riddle_answer(session["Riddle"]["answer"],user_answer):
+			response = True
+			return render_template("riddle.html",response = response )
+		else:
+			response = False
+			error = "Wrong Answer, try again!"
+			return render_template('riddle.html', riddle = session["Riddle"]["question"],response = response,error = error)
+			
+	if request.method == "POST" and request.form["btn"] == "refresh":
+		riddle = controllerRiddle.get_riddle_random(session["Riddle"]["ID"])
+		session["Riddle"] = riddle.__dict__
+		return render_template("riddle.html", riddle = session["Riddle"]["question"])
+
+
 
 
 @app.route("/login",methods=['POST','GET'])
@@ -32,10 +58,6 @@ def login():
 		if not login_sucess:
 			return render_template('login.html', errors = errors)
 
-		#session.permanent = True	
-		# session["user"] = user
-
-		flash("Login Sucessful!")
 		return redirect(url_for("user", user=user))
 	else:
 		if "user" in session:
