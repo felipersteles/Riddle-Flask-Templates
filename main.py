@@ -15,12 +15,8 @@ controllerRiddle = ControllerRiddle()
 
 @app.route("/", methods = ['POST','GET'])
 def home():
-	#riddle = controllerRiddle.get_riddle_random()
 	if request.method == "GET":
 		riddle = controllerRiddle.get_riddle_last()
-		# session["Riddle_ID"] = riddle.ID
-		# session["Riddle_Answer"] = riddle.answer
-		# session["Riddle_Question"] = riddle.q
 		session["Riddle"] = riddle.__dict__
 
 
@@ -103,6 +99,8 @@ def logout():
 	session.pop("user",None)
 	session.pop("email", None)
 	return redirect(url_for('login'))
+
+	
 
 if __name__ == '__main__':
 	app.run()

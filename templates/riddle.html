@@ -2,10 +2,28 @@
 {% block title %}Riddle me this!{% endblock %}
 
 {% block content %}
-<form action="" method="post" autocomplete="off">
+<style>
+.mainForm{
+    width: 200px;
+    padding: auto;
+    text-align: center;
+}
+html {
+    height: 100%;
+}
+body {
+    background-image: url("/static/images/Riddle.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+</style>
+<form action="" method="post" autocomplete="off" class="mainForm">
     <div> Riddle me this:</div>
 	<div>
-		<header>{{ riddle }}</header>
+		<header class="riddle">{{ riddle }}</header>
 		
     <div>
     <div>
